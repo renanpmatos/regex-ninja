@@ -1,9 +1,12 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Bug } from "lucide-react";
+import { FormEvent } from "react";
 
 export default function Home() {
   interface regexProps {
@@ -65,19 +68,25 @@ export default function Home() {
     return end - ini;
   };
 
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+  }
+
   return (
-    <div className="h-full w-full">
-      <form action="" className="m-40">
+    <div className="h-full w-full m-4o%">
+      <form onSubmit={onSubmit} className="">
         <div className="m-10">
           <Label htmlFor="target">Inform a Target String</Label>
-          <Textarea className="border-2" id="target" placeholder="Target" />
+          <Textarea className="border-2" name="target" placeholder="Target" />
         </div>
         <div className="m-10">
           <Label htmlFor="regex">Inform a Regular Expression</Label>
           <Input
             className="border-2"
             type="text"
-            id="regex"
+            name="regex"
             placeholder="Regex"
           />
         </div>
@@ -87,7 +96,7 @@ export default function Home() {
           </Button>
         </div>
       </form>
-      <div className="mx-40 my-10 flex flex-row space-x-5">
+      <div className="flex flex-row space-x-5">
         <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-md">
           <Checkbox className="shadow-sm" />
           <div className="space-y-1 leading-none flex flex-col">
@@ -105,7 +114,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="mx-40 my-10">
+      <div className="my-10">
         <div className="h-[480px] w-full bg-slate-50 border broder-slate-500"></div>
       </div>
     </div>
